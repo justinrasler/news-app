@@ -1,23 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import NewsDisplay from './components/NewsDisplay';
+import Form from './components/Form';
+import {useState, useEffect} from 'react'
+
 
 function App() {
+
+  //variable with your api key
+  const apiKey = "884c9477dc6f4e5c8461472861ae9874"
+
+  //state to hold newsdata
+  const [news, setNews] = useState(null);
+
+  //function to getNews
+  const getNews = async (searchTerm) => {
+    //make a fetch request and store response
+    const response = await fetch(`https://newsapi.org/v2/everything?q=${searchTerm}&apiKey=${apiKey}`);
+     // Parse JSON response into a javascript object
+     const data = await response.json();
+     //set the Movie state to the movie
+     setNews(data);
+   };
+
+   //This will run on the first render but not on subsquent renders
+  useEffect(() => {
+    getNews("tesla");
+  }, []);
+
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form newssearch={getNews} />
+      <NewsDisplay news={news} />
     </div>
   );
 }
