@@ -20,9 +20,8 @@ const [formData, setFormData] = useState({
         setFormData(newState)
     }
 
-     //handleSubmit function for when the form submits
      const handleSubmit = (event) => {
-        // prevent the page from refreshing
+        // prevent whole page refresh
         event.preventDefault()
         // pass the search from the formData to the function in the props
         props.newssearch(formData.searchterm)

@@ -2,6 +2,8 @@ import './App.css';
 import NewsDisplay from './components/NewsDisplay';
 import Form from './components/Form';
 import {useState, useEffect} from 'react'
+import Articles from './components/Articles';
+
 
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
     const response = await fetch(`https://newsapi.org/v2/everything?q=${searchTerm}&apiKey=${apiKey}`);
      // Parse JSON response into a javascript object
      const data = await response.json();
-     //set the Movie state to the movie
+     //set the news state to the news
      setNews(data);
    };
 
@@ -32,9 +34,9 @@ function App() {
   return (
     <div className="App">
       <Form newssearch={getNews} />
-      <NewsDisplay news={news} />
-    </div>
-  );
+      <Articles news={news} />
+   </div>
+  )
 }
 
 export default App;
