@@ -35,6 +35,7 @@ function App() {
     <div className="App">
       <Form newssearch={getNews} />
       <Articles news={news} />
+
    </div>
   )
 }
